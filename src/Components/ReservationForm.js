@@ -48,7 +48,7 @@ export default function ReservationForm() {
       date: Yup.string().required("Required"),
       time: Yup.string().required("Required"),
       noOfPeople: Yup.number()
-        .min(1, "At least one people needed")
+        .min(1, "At least one person needed")
         .required("Required"),
       message: Yup.string().nullable(),
     }),
@@ -152,9 +152,10 @@ export default function ReservationForm() {
                 isInvalid={!!formik.errors.date && formik.touched.date}
               >
                 <Input
-                  type="date"
+                  type="text"
                   placeholder="Date"
                   h="50px"
+                  onFocus={(e) => (e.target.type = "date")}
                   {...formik.getFieldProps("date")}
                 />
                 <FormErrorMessage fontSize="xs" mt={1}>
@@ -167,9 +168,10 @@ export default function ReservationForm() {
                 isInvalid={!!formik.errors.time && formik.touched.time}
               >
                 <Input
-                  type="time"
+                  type="text"
                   placeholder="Time"
                   h="50px"
+                  onFocus={(e) => (e.target.type = "time")}
                   {...formik.getFieldProps("time")}
                 />
                 <FormErrorMessage fontSize="xs" mt={1}>

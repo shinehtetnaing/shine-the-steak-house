@@ -191,6 +191,7 @@ export default function Menu() {
                 {stakes.map((stake) => (
                   <GridItem key={stake._id}>
                     <MenuCard
+                      id={stake._id}
                       imageSrc={stake.image}
                       name={stake.name}
                       description={stake.description}
@@ -257,6 +258,7 @@ export default function Menu() {
                 {desserts.map((dessert) => (
                   <GridItem key={dessert._id}>
                     <MenuCard
+                      id={dessert._id}
                       imageSrc={dessert.image}
                       name={dessert.name}
                       description={dessert.description}
