@@ -7,24 +7,13 @@ import {
   HStack,
   Text,
   Spacer,
+  Skeleton,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function BestMenu() {
-  const [bestMenu, setBestMenu] = useState([]);
-
-  const fetchBestMenu = () => {
-    fetch("https://mock-steak-data-api.vercel.app/api/steaks")
-      .then((response) => response.json())
-      .then((data) => {
-        const randomItems = data.sort(() => 0.5 - Math.random()).slice(0, 3);
-        setBestMenu(randomItems);
-      });
-  };
-
-  useEffect(() => {
-    fetchBestMenu();
-  }, []);
+export default function BestMenu({ bestMenu }) {
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Box as="section">
@@ -40,24 +29,37 @@ export default function BestMenu() {
           mt={10}
         >
           {bestMenu.map((menu) => (
-            <Box
-              key={menu._id}
-              maxW="sm"
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <Image src={menu.image} alt={menu.name} w="100%" h="250px" />
-              <HStack p={6}>
-                <Heading as="h6" size="md">
-                  {menu.name}
-                </Heading>
-                <Spacer />
-                <Text color="red.400" fontWeight="medium">
-                  ${menu.price}
-                </Text>
-              </HStack>
-            </Box>
+            <Link to={`menu/${menu.id}`}>
+              <Box
+                key={menu._id}
+                maxW="sm"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                transition="all 0.2s"
+                _hover={{ shadow: "lg" }}
+              >
+                <Skeleton isLoaded={!isLoading} h="250px">
+                  <Image
+                    src={menu.image}
+                    alt={menu.name}
+                    w="100%"
+                    h="250px"
+                    onLoad={() => setIsLoading(false)}
+                    display={isLoading ? "none" : "block"}
+                  />
+                </Skeleton>
+                <HStack p={6}>
+                  <Heading as="h6" size="md">
+                    {menu.name}
+                  </Heading>
+                  <Spacer />
+                  <Text color="red.400" fontWeight="medium">
+                    ${menu.price}
+                  </Text>
+                </HStack>
+              </Box>
+            </Link>
           ))}
         </Flex>
       </Container>

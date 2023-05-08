@@ -5,14 +5,16 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+
+// Layouts
 import RootLayout from "./Layouts/RootLayout";
 import MenuLayout from "./Layouts/MenuLayout";
 
 // Pages
-import Home from "./Pages/Home";
+import Home, { loader as bestMenuLoader } from "./Pages/Home";
 import About from "./Pages/About";
-import Menu from "./Pages/Menu";
-import MenuDetails from "./Pages/MenuDetails";
+import Menu, { loader as menuLoader } from "./Pages/Menu";
+import MenuDetails, { loader as menuDetailLoader } from "./Pages/MenuDetails";
 import Reservation from "./Pages/Reservation";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
@@ -20,11 +22,11 @@ import Login from "./Pages/Login";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
+      <Route index element={<Home />} loader={bestMenuLoader} />
       <Route path="about" element={<About />} />
       <Route path="menu" element={<MenuLayout />}>
-        <Route index element={<Menu />} />
-        <Route path=":id" element={<MenuDetails />} />
+        <Route index element={<Menu />} loader={menuLoader} />
+        <Route path=":id" element={<MenuDetails />} loader={menuDetailLoader} />
       </Route>
       <Route path="reservation" element={<Reservation />} />
       <Route path="contact" element={<Contact />} />
