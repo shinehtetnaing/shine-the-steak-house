@@ -9,16 +9,22 @@ import {
   Heading,
   HStack,
   Icon,
+  IconButton,
   Spacer,
   useDisclosure,
   VStack,
   Container,
+  Badge,
+  Box,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { BsCart3 } from "react-icons/bs";
 import { NavLink, Link } from "react-router-dom";
+import { useMenu } from "../Context/MenuContext";
 
 export default function Nav() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { menuCount } = useMenu();
 
   return (
     <nav>
@@ -28,7 +34,7 @@ export default function Nav() {
         borderBottom="1px solid"
         borderBottomColor="gray.300"
       >
-        <Container display="flex" maxW="container.xl">
+        <Container display="flex" alignItems="center" maxW="container.xl">
           <Icon
             as={HamburgerIcon}
             boxSize={6}
@@ -82,10 +88,32 @@ export default function Nav() {
             <NavLink to="contact">Contact</NavLink>
           </HStack>
           <Spacer display={{ base: "none", lg: "flex" }} />
-          <HStack>
-            <NavLink to="login">
+          <HStack spacing={4}>
+            <Link to="your-cart">
+              <Box position="relative">
+                <IconButton
+                  aria-label="Cart"
+                  colorScheme="red"
+                  size="md"
+                  variant="outline"
+                  icon={<BsCart3 />}
+                />
+                <Badge
+                  variant="solid"
+                  colorScheme="red"
+                  position="absolute"
+                  top="-8px"
+                  right="-8px"
+                  borderRadius="full"
+                  px={2}
+                >
+                  {menuCount}
+                </Badge>
+              </Box>
+            </Link>
+            <Link to="login">
               <Button colorScheme="red">Login</Button>
-            </NavLink>
+            </Link>
           </HStack>
         </Container>
       </Flex>

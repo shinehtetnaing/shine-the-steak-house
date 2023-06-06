@@ -17,6 +17,7 @@ import Menu, { loader as menuLoader } from "./Pages/Menu";
 import MenuDetails, { loader as menuDetailLoader } from "./Pages/MenuDetails";
 import Reservation from "./Pages/Reservation";
 import Contact from "./Pages/Contact";
+import Cart from "./Pages/Cart/Cart";
 import Login from "./Pages/Login";
 
 const router = createBrowserRouter(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="reservation" element={<Reservation />} />
       <Route path="contact" element={<Contact />} />
+      <Route path="your-cart" element={<Cart />} />
       <Route path="login" element={<Login />} />
     </Route>
   )

@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Link, useLocation, useLoaderData } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { getMenuDetail } from "../api";
+import { useMenu } from "../Context/MenuContext";
 
 export function loader({ params }) {
   return getMenuDetail(params.id);
@@ -24,6 +25,8 @@ export default function MenuDetails() {
 
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
+
+  const { addToCart } = useMenu();
 
   const search = location.state?.search || "";
   const category = location.state?.category || "all";
@@ -73,7 +76,7 @@ export default function MenuDetails() {
                   $ {menuDetail.price}
                 </Tag>
                 <Text fontSize="2xl">{menuDetail.description}</Text>
-                <Button colorScheme="red">Add to Cart</Button>
+                <Button colorScheme="red" onClick={() => addToCart(menuDetail)}>Add to Cart</Button>
               </VStack>
             </Box>
           </Flex>
