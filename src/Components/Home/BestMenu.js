@@ -29,9 +29,8 @@ export default function BestMenu({ bestMenu }) {
           mt={10}
         >
           {bestMenu.map((menu) => (
-            <Link to={`menu/${menu.id}`}>
+            <Link to={`menu/${menu.id}`} key={menu.id}>
               <Box
-                key={menu._id}
                 maxW="sm"
                 borderWidth="1px"
                 borderRadius="lg"

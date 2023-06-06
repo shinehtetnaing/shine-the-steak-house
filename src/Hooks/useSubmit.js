@@ -23,6 +23,13 @@ const useSubmit = (formType) => {
         body: "Thank you for reaching out to us. We have received your message and our team will be reviewing it shortly. We appreciate your interest in our restaurant and we'll do our best to get back to you as soon as possible.",
       });
     }
+    if (formType === "checkout") {
+      setAlertMsg({
+        ...alertMsg,
+        header: "Your order has been successfully placed!",
+        body: "Thank you for choosing our restaurant! Our team is now preparing your meal with care. We appreciate your patience.",
+      });
+    }
     onOpen();
   };
 

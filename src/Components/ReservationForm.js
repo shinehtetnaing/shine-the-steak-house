@@ -23,7 +23,6 @@ import useSubmit from "../Hooks/useSubmit";
 import Alert from "./Alert";
 
 export default function ReservationForm() {
-  // const {isLoading, response, submit} = useSubmit();
   const [isLoading, setIsLoading] = useState(true);
   const { alertMsg, isOpen, onClose, submit } = useSubmit("reservation");
 
@@ -55,7 +54,7 @@ export default function ReservationForm() {
   });
 
   const handleNumberInputChange = (valueString) => {
-    // initial age set empty string for placeholder display and it needs to increase as integer
+    // initial number set empty string for placeholder display and it needs to increase as integer
     const valueNumber = parseInt(valueString, 10);
     formik.setFieldValue("noOfPeople", valueNumber);
   };
@@ -214,7 +213,6 @@ export default function ReservationForm() {
             <GridItem colSpan={{ base: 1, md: 2, lg: 3 }} textAlign="center">
               <Button
                 type="submit"
-                // isLoading={isLoading}
                 colorScheme="red"
                 size={{ base: "lg", lg: "md" }}
               >
